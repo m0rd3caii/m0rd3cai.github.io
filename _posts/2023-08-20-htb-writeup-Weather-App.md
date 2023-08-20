@@ -132,15 +132,6 @@ As we can see that if a user wants to register, they must meet these conditions:
 
 If you log in with the Admin User we can access `/app/flag` and get the flag otherwise it sends you a message `'you are not admin'`.
 
-![](../assets/images/htb-writeup-delivery/website1.png)
-
-The contact us section tells us we need an @delivery.htb email address and tells us port 8065 is a MatterMost server. MatterMost is a Slack-like collaboration platform that can be self-hosted.
-
-![](../assets/images/htb-writeup-delivery/website2.png)
-
-Browsing to port 8065 we get the MatterMost login page but we don't have credentials yet
-
-![](../assets/images/htb-writeup-delivery/mm1.png)
 
 ## Helpdesk
 
