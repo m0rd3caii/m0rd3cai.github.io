@@ -93,6 +93,7 @@ module.exports = database => {
 
 ## Code Analysis
 We will find that there are 4 routes available in the code, we can know that this is a node.js application with Express Applied:
+
 ![](../assets/images/htb-writeup-WeatherApp/primeraRuta.png)
 
 ![](../assets/images/htb-writeup-WeatherApp/segundaRuta.png)
