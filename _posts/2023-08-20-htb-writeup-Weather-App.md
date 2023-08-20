@@ -156,7 +156,8 @@ Check the routing code of `/login`:
 We can see that if you log in with the Admin User we can access `/app/flag` and get the flag otherwise it sends you a message `'you are not admin'`.
 
 ## Ideas
-hola
+We will be using SSRF to attack the program, and the point of exploitation is obvious here.
+
 
 ## Intrusión
 
