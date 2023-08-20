@@ -14,7 +14,7 @@ tags:
   - challenge
 ---
 
-![](/assets/images/htb-writeup-WeatherApp/website.PNG)
+![](../assets/images/htb-writeup-WeatherApp/website.PNG)
 
 
 ## Portscan
