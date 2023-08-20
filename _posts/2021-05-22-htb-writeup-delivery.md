@@ -16,7 +16,7 @@ tags:
   - mysql
   - mattermost
   - hashcat
-  - rules
+  - challenge
 ---
 
 ![](../assets/images/avatar.png)
