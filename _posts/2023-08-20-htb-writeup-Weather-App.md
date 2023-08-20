@@ -21,74 +21,74 @@ tags:
 **index.js File:**
 
 ```js
-const path              = require('path');
-const fs                = require('fs');
-const express           = require('express');
-const router            = express.Router();
-const WeatherHelper     = require('../helpers/WeatherHelper');
-
-let db;
-
-const response = data => ({ message: data });
-
-router.get('/', (req, res) => {
- return res.sendFile(path.resolve('views/index.html'));
-});
-
-router.get('/register', (req, res) => {
- return res.sendFile(path.resolve('views/register.html'));
-});
-
-router.post('/register', (req, res) => {
-
- if (req.socket.remoteAddress.replace(/^.*:/, '') != '127.0.0.1') {
-  return res.status(401).end();
- }
-
- let { username, password } = req.body;
-
- if (username && password) {
-  return db.register(username, password)
-   .then(()  => res.send(response('Successfully registered')))
-   .catch(() => res.send(response('Something went wrong')));
- }
-
- return res.send(response('Missing parameters'));
-});
-
-router.get('/login', (req, res) => {
- return res.sendFile(path.resolve('views/login.html'));
-});
-
-router.post('/login', (req, res) => {
- let { username, password } = req.body;
-
- if (username && password) {
-  return db.isAdmin(username, password)
-   .then(admin => {
-    if (admin) return res.send(fs.readFileSync('/app/flag').toString());
-    return res.send(response('You are not admin'));
-   })
-   .catch(() => res.send(response('Something went wrong')));
- }
- 
- return re.send(response('Missing parameters'));
-});
-
-router.post('/api/weather', (req, res) => {
- let { endpoint, city, country } = req.body;
-
- if (endpoint && city && country) {
-  return WeatherHelper.getWeather(res, endpoint, city, country);
- }
-
- return res.send(response('Missing parameters'));
-}); 
-
-module.exports = database => { 
- db = database;
- return router;
-};
+   1   │ const path              = require('path');
+   2   │ const fs                = require('fs');
+   3   │ const express           = require('express');
+   4   │ const router            = express.Router();
+   5   │ const WeatherHelper     = require('../helpers/WeatherHelper');
+   6   │ 
+   7   │ let db;
+   8   │ 
+   9   │ const response = data => ({ message: data });
+  10   │ 
+  11   │ router.get('/', (req, res) => {
+  12   │     return res.sendFile(path.resolve('views/index.html'));
+  13   │ });
+  14   │ 
+  15   │ router.get('/register', (req, res) => {
+  16   │     return res.sendFile(path.resolve('views/register.html'));
+  17   │ });
+  18   │ 
+  19   │ router.post('/register', (req, res) => {
+  20   │ 
+  21   │     if (req.socket.remoteAddress.replace(/^.*:/, '') != '127.0.0.1') {
+  22   │         return res.status(401).end();
+  23   │     }
+  24   │ 
+  25   │     let { username, password } = req.body;
+  26   │ 
+  27   │     if (username && password) {
+  28   │         return db.register(username, password)
+  29   │             .then(()  => res.send(response('Successfully registered')))
+  30   │             .catch(() => res.send(response('Something went wrong')));
+  31   │     }
+  32   │ 
+  33   │     return res.send(response('Missing parameters'));
+  34   │ });
+  35   │ 
+  36   │ router.get('/login', (req, res) => {
+  37   │     return res.sendFile(path.resolve('views/login.html'));
+  38   │ });
+  39   │ 
+  40   │ router.post('/login', (req, res) => {
+  41   │     let { username, password } = req.body;
+  42   │ 
+  43   │     if (username && password) {
+  44   │         return db.isAdmin(username, password)
+  45   │             .then(admin => {
+  46   │                 if (admin) return res.send(fs.readFileSync('/app/flag').toString());
+  47   │                 return res.send(response('You are not admin'));
+  48   │             })
+  49   │             .catch(() => res.send(response('Something went wrong')));
+  50   │     }
+  51   │     
+  52   │     return re.send(response('Missing parameters'));
+  53   │ });
+  54   │ 
+  55   │ router.post('/api/weather', (req, res) => {
+  56   │     let { endpoint, city, country } = req.body;
+  57   │ 
+  58   │     if (endpoint && city && country) {
+  59   │         return WeatherHelper.getWeather(res, endpoint, city, country);
+  60   │     }
+  61   │ 
+  62   │     return res.send(response('Missing parameters'));
+  63   │ }); 
+  64   │ 
+  65   │ module.exports = database => { 
+  66   │     db = database;
+  67   │     return router;
+  68   │ };
 ```
 
 ## Code Analysis
