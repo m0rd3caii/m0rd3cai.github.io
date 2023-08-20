@@ -7,7 +7,7 @@ classes: wide
 header:
   teaser: assets/images/htb-writeup-Weather-App/hederg3.png
   teaser_home_page: true
-  icon: ../assets/images/hackthebox.webp
+  icon: /assets/images/hackthebox.webp
 categories:
   - hackthebox
   - infosec
