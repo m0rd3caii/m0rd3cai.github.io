@@ -198,6 +198,6 @@ Write the POC
        │ y': 'lol'})
 ```
 Execute the POC
-```sh
+```py
 $ python3 exploit.py
 ```
