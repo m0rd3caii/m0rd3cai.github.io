@@ -17,7 +17,7 @@ tags:
 ![](../assets/images/htb-writeup-WeatherApp/website.PNG)
 
 
-## Portscan
+**index.js File:**
 
 ```
 Nmap scan report for 10.129.148.141
