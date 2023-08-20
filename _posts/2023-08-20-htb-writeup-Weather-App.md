@@ -102,6 +102,39 @@ We will find that there are 4 routes available in the code, we can know that thi
 
 ![](../assets/images/htb-writeup-WeatherApp/cuartaRuta.png)
 
+Check the routing code of `/register`:
+
+```js
+  15   │ router.get('/register', (req, res) => {
+  16   │     return res.sendFile(path.resolve('views/register.html'));
+  17   │ });
+  18   │ 
+  19   │ router.post('/register', (req, res) => {
+  20   │ 
+  21   │     if (req.socket.remoteAddress.replace(/^.*:/, '') != '127.0.0.1') {
+  22   │         return res.status(401).end();
+  23   │     }
+  24   │ 
+  25   │     let { username, password } = req.body;
+  26   │ 
+  27   │     if (username && password) {
+  28   │         return db.register(username, password)
+  29   │             .then(()  => res.send(response('Successfully registered')))
+  30   │             .catch(() => res.send(response('Something went wrong')));
+  31   │     }
+  32   │ 
+  33   │     return res.send(response('Missing parameters'));
+  34   │ });
+
+```
+
+
+
+
+
+
+
+
 
 If you log in with the Admin User we can access `/app/flag` and get the flag otherwise it sends you a message `'you are not admin'`.
 
