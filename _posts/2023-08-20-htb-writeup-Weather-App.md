@@ -128,6 +128,7 @@ Check the routing code of `/register`:
 ```
 As we can see that if a user wants to register, they must meet these conditions:
 
+  *Only requests originating from the same machine (localhost) are allowed.
 
 
 
