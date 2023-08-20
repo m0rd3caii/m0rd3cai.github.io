@@ -5,7 +5,7 @@ excerpt: "A pit of eternal darkness, a mindless journey of abeyance, this feels 
 date: 2023-08-20
 classes: wide
 header:
-  teaser: ../assets/images/avatar.png
+  teaser: assets/images/htb-writeup-WeatherApp/hederg3.PNG
   teaser_home_page: true
   icon: ../assets/images/hackthebox.webp
 categories:
