@@ -157,7 +157,7 @@ We can see that if you log in with the Admin User we can access `/app/flag` and 
 
 ## Ideas
 We will be using SSRF to attack the program, and the point of exploitation is obvious here.
-
+![](../assets/images/htb-writeup-WeatherApp/ssrf.PNG)
 
 ## Intrusión
 
