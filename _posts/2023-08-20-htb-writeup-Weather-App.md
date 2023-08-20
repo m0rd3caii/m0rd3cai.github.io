@@ -92,7 +92,7 @@ module.exports = database => {
 ```
 
 ## Code Analysis
-If you log in with the Admin User we can access `/app/flag` and get the flag otherwise it sends you a message ` 'you are not admin' `
+If you log in with the Admin User we can access `/app/flag` and get the flag otherwise it sends you a message ` 'you are not admin' `.
 
 ![](../assets/images/htb-writeup-delivery/website1.png)
 
