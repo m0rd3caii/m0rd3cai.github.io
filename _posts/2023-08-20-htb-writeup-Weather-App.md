@@ -92,6 +92,11 @@ module.exports = database => {
 ```
 
 ## Code Analysis
+We will find that there are 4 routes available in the code, we can know that this is a node.js application with Express Applied:
+
+
+
+
 If you log in with the Admin User we can access `/app/flag` and get the flag otherwise it sends you a message `'you are not admin'`.
 
 ![](../assets/images/htb-writeup-delivery/website1.png)
