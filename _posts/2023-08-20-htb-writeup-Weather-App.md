@@ -129,6 +129,29 @@ Check the routing code of `/register`:
 As we can see that if a user wants to register, they must meet these conditions:
 
 - Only requests originating from the same machine (localhost) are allowed.
+  
+Check the routing code of `/login`:
+
+```js
+  36   │ router.get('/login', (req, res) => {
+  37   │     return res.sendFile(path.resolve('views/login.html'));
+  38   │ });
+  39   │ 
+  40   │ router.post('/login', (req, res) => {
+  41   │     let { username, password } = req.body;
+  42   │ 
+  43   │     if (username && password) {
+  44   │         return db.isAdmin(username, password)
+  45   │             .then(admin => {
+  46   │                 if (admin) return res.send(fs.readFileSync('/app/flag').toString());
+  47   │                 return res.send(response('You are not admin'));
+  48   │             })
+  49   │             .catch(() => res.send(response('Something went wrong')));
+  50   │     }
+  51   │     
+  52   │     return re.send(response('Missing parameters'));
+  53   │ });
+```
 
 If you log in with the Admin User we can access `/app/flag` and get the flag otherwise it sends you a message `'you are not admin'`.
 
