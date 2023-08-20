@@ -159,6 +159,14 @@ We can see that if you log in with the Admin User we can access `/app/flag` and 
 We will be using SSRF to attack the program, and the point of exploitation is obvious here.
 ![](../assets/images/htb-writeup-WeatherApp/ssrf.PNG)
 
+We can try to make additional http requests by truncating characters.
+```js
+-%27 — ‘
+-%22 — “
+-\u0120 — (space)
+-\u010D — \r
+-\u010A — \n
+```
 ## Intrusión
 
 Useful load
