@@ -13,6 +13,7 @@ categories:
 tags:  
   - Challenge
   - SSRF
+  - SQL
 ---
 
 ![](../assets/images/htb-writeup-WeatherApp/website.PNG)
