@@ -130,9 +130,6 @@ As we can see that if a user wants to register, they must meet these conditions:
 
 - Only requests originating from the same machine (localhost) are allowed.
 
-
-
-
 If you log in with the Admin User we can access `/app/flag` and get the flag otherwise it sends you a message `'you are not admin'`.
 
 ![](../assets/images/htb-writeup-delivery/website1.png)
