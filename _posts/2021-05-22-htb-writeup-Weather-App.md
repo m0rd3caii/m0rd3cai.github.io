@@ -11,7 +11,7 @@ header:
 categories:
   - hackthebox
 tags:  
-  - challenge
+  - Challenge
 ---
 
 ![](../assets/images/htb-writeup-WeatherApp/website.PNG)
