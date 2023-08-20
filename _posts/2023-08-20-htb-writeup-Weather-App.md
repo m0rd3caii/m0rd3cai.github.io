@@ -7,7 +7,7 @@ classes: wide
 header:
   teaser: assets/images/htb-writeup-WeatherApp/hederg3.PNG
   teaser_home_page: true
-  icon: assets/images/avatar.png
+  icon: assets/images/hackthebox.webp
 categories:
   - hackthebox
 tags:  
