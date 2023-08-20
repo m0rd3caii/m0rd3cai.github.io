@@ -12,6 +12,7 @@ categories:
   - hackthebox
 tags:  
   - Challenge
+  - SSRF
 ---
 
 ![](../assets/images/htb-writeup-WeatherApp/website.PNG)
