@@ -19,7 +19,7 @@ tags:
 
 **index.js File:**
 
-```js
+```java
 Nmap scan report for 10.129.148.141
 Host is up (0.018s latency).
 Not shown: 65532 closed ports
