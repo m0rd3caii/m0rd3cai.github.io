@@ -11,10 +11,6 @@ header:
 categories:
   - hackthebox
 tags:  
-  - osticket
-  - mysql
-  - mattermost
-  - hashcat
   - challenge
 ---
 
