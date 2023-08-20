@@ -125,12 +125,8 @@ Check the routing code of `/register`:
   32   │ 
   33   │     return res.send(response('Missing parameters'));
   34   │ });
-
 ```
-
-
-
-
+As we can see that if a user wants to register, they must meet these conditions:
 
 
 
