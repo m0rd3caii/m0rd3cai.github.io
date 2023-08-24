@@ -2,5 +2,5 @@
 title: "Search"
 layout: search
 permalink: /search/
-author_profile: true
+author_profile: false
 ---
