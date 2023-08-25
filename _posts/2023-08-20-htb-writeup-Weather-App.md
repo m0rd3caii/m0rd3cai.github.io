@@ -199,6 +199,6 @@ Write the POC
        │ y': 'lol'})
 ```
 Execute the POC
-```py
+```ruby
 $ python3 exploit.py
 ```
