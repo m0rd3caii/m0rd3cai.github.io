@@ -234,6 +234,7 @@ silentobserver@sandworm:~$ chmod +x pspy64
 ```
 When we run pspy, we will see a process in which the root executes a script in Rust and runs it as the user Atlas.
 
+```
 
      ██▓███    ██████  ██▓███ ▓██   ██▓
     ▓██░  ██▒▒██    ▒ ▓██░  ██▒▒██  ██▒
@@ -244,7 +245,9 @@ When we run pspy, we will see a process in which the root executes a script in R
     ░▒ ░     ░ ░▒  ░ ░░▒ ░     ▓██ ░▒░ 
     ░░       ░  ░  ░  ░░       ▒ ▒ ░░  
                    ░           ░ ░     
-                               ░ ░     
+                               ░ ░    
+```
+
 ```ruby
 2023/08/26 17:46:01 CMD: UID=0     PID=2990   | /bin/sh -c cd /opt/tipnet && /bin/echo "e" | /bin/sudo -u atlas /usr/bin/cargo run --offline
 ```
