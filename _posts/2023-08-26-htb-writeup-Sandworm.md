@@ -146,8 +146,8 @@ connect to [10.10.15.23] from (UNKNOWN) [10.10.11.218] 46060
 bash: cannot set terminal process group (-1): Inappropriate ioctl for device
 bash: no job control in this shell
 /usr/local/sbin/lesspipe: 1: dirname: not found
-atlas@sandworm:/var/www/html/SSA$ ls
-ls
-SSA
+atlas@sandworm:/var/www/html/SSA$ id
+id
+uid=1000(atlas) gid=1000(atlas) groups=1000(atlas)
 atlas@sandworm:/var/www/html/SSA$ 
 ```
