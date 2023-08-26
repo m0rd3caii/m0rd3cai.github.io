@@ -93,5 +93,5 @@ This is the GPG public key provided to us for conducting tests.
 
 ![](../assets/images/htb-writeup-Sandworm/fotoWeb2.PNG)
 
-![PGP Tool](https://pgptool.org/)
-![8gwifi](https://8gwifi.org/pgpencdec.jsp)
+[PGP Tool](https://pgptool.org/)
+[8gwifi](https://8gwifi.org/pgpencdec.jsp)
