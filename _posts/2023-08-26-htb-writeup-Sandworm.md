@@ -21,7 +21,7 @@ tags:
 
 **RECON**
 
-**NMAP PORT SCAN**
+**PORTS SCAN**
 
 We performed a scan of all possible open ports on the victim machine.
 
@@ -50,7 +50,7 @@ Nmap done: 1 IP address (1 host up) scanned in 11.51 seconds
 
 ```
 
-**NMAP SERVICE AND VERSION SCAN**
+**SERVICE AND VERSION SCAN**
 
 ```ruby
 ❯ sudo nmap -p22,80,443 -sCV 10.10.11.218 -oN target
