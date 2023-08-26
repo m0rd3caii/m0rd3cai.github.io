@@ -93,4 +93,6 @@ This is the GPG public key provided to us for conducting tests.
 
 ![](../assets/images/htb-writeup-Sandworm/fotoWeb3.PNG)
 
+If we take a closer look at the guide, there's a signature verifier that allows us to use our own keys.
 
+![](../assets/images/htb-writeup-Sandworm/fotoWeb4.PNG)
