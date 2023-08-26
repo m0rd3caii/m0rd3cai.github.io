@@ -96,3 +96,19 @@ This is the GPG public key provided to us for conducting tests.
 If we take a closer look at the guide, there's a signature verifier that allows us to use our own keys.
 
 ![](../assets/images/htb-writeup-Sandworm/fotoWeb4.PNG)
+
+**Exploit with GPG**
+
+What we will do now is generate our GPG key and check if it is vulnerable to STTI.
+
+First, we will start by generating a PGP key on the following [page](https://youritmate.us/pgp/).
+
+![](../assets/images/htb-writeup-Sandworm/fotoWeb5.PNG)
+
+Afterwards, copy the private key on the next page, paste the key, and enter the optional password if you set one. Then, input a message that you would like to use.
+
+![](../assets/images/htb-writeup-Sandworm/fotoWeb6.PNG)
+
+It's important to understand that we are conducting this test to assess what we can manipulate and, as we can see, we are able to manipulate the name.
+
+![](../assets/images/htb-writeup-Sandworm/fotoWeb7.PNG)
