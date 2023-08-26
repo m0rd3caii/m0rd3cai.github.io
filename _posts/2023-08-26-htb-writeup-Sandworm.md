@@ -85,4 +85,6 @@ At the top of the page, there is a contact button that will redirect us to a for
 
 ![](../assets/images/htb-writeup-Sandworm/fotoWeb1.PNG)
 
+If we look at the bottom of the text box, there is a link that redirects us to a guide. This guide involves sending a message using a public key, and the website allows us to practice with its own public key.
 
+![](../assets/images/htb-writeup-Sandworm/fotoWeb2.PNG)
