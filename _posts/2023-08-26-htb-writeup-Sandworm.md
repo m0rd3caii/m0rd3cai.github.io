@@ -91,8 +91,6 @@ If we look at the bottom of the text box, there is a link that redirects us to a
 
 This is the GPG public key provided to us for conducting tests.
 
-![](../assets/images/htb-writeup-Sandworm/fotoWeb2.PNG)
+![](../assets/images/htb-writeup-Sandworm/fotoWeb3.PNG)
 
--[PGP Tool](https://pgptool.org/)
 
--[8gwifi](https://8gwifi.org/pgpencdec.jsp)
