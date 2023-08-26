@@ -81,4 +81,8 @@ Nmap done: 1 IP address (1 host up) scanned in 15.37 seconds
 
 We add the domain to the /etc/hosts file.
 
+At the top of the page, there is a contact button that will redirect us to a form. This form is designed to send an encrypted PGP message. With this, we can check if there's a possibility of performing any kind of command execution.
+
 ![](../assets/images/htb-writeup-Sandworm/fotoWeb1.PNG)
+
+
