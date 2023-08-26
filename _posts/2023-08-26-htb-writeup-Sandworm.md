@@ -7,7 +7,7 @@ classes: wide
 header:
   teaser: assets/images/thm-writeup-Basic_Pentesting/intro.png
   teaser_home_page: true
-  icon: assets/images/tryhackme.png
+  icon: assets/images/hackthebox.webp
 categories:
   - hackthebox
 tags:  
