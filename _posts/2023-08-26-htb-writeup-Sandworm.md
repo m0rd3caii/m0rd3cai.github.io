@@ -1,6 +1,6 @@
 ---
 layout: single
-title: Basic Pentesting - TryHackMe
+title: Sandworm - Hack The Box
 excerpt: "This is a machine that allows you to practise web app hacking and privilege escalation."
 date: 2023-08-24
 classes: wide
