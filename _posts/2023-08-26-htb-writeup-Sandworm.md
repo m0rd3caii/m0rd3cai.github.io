@@ -796,7 +796,7 @@ You can now run 'firejail --join=5687' in another terminal to obtain a shell whe
 
 In the second terminal, which follows, we will execute the commands as instructed.
 
-```
+```ruby
 atlas@sandworm:~$ firejail --join=5687
 changing root to /proc/5687/root
 Warning: cleaning all supplementary groups
