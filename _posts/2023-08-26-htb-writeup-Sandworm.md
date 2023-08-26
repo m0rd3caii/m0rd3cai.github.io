@@ -77,5 +77,8 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 15.37 seconds
-
 ```
+
+We add the domain to the /etc/hosts file.
+
+![](../assets/images/htb-writeup-Sandworm/fotoWeb1.PNG)
