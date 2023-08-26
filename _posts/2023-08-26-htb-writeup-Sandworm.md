@@ -105,7 +105,7 @@ First, we will start by generating a PGP key on the following [page](https://you
 
 ![](../assets/images/htb-writeup-Sandworm/fotoWeb5.PNG)
 
-Afterwards, copy the private key on the next page, paste the key, and enter the optional password if you set one. Then, input a message that you would like to use.
+Afterwards, copy the private key on the next [page](http://www.2pih.com/pgp.html), paste the key, and enter the optional password if you set one. Then, input a message that you would like to use.
 
 ![](../assets/images/htb-writeup-Sandworm/fotoWeb6.PNG)
 
