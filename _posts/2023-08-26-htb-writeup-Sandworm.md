@@ -213,7 +213,7 @@ silentobserver@sandworm:~$
 ```
 **Vertical Privilege Escalation**
 
-We deploy pspy to monitor the running tasks.
+We deploy [pspy](https://github.com/DominicBreuker/pspy/releases/tag/v1.2.1) to monitor the running tasks.
 
 `❯ python3 -m http.server 80`
 
