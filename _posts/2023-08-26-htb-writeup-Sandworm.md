@@ -16,4 +16,4 @@ tags:
   - SSTI
   - SUID
 ---
-![](../assets/images/thm-writeup-Basic_Pentesting/foto21.PNG)
+![](../assets/images/htb-writeup-Sandworm/sandworm.jpeg)
