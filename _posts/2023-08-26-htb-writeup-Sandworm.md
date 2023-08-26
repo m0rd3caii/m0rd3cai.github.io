@@ -236,7 +236,7 @@ When we run pspy, we will see a process in which the root executes a script in R
 
 
 
-```ruby
+```perl
 
      ██▓███    ██████  ██▓███ ▓██   ██▓
     ▓██░  ██▒▒██    ▒ ▓██░  ██▒▒██  ██▒
