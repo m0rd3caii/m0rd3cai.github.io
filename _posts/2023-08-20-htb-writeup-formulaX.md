@@ -70,3 +70,9 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 10.95 seconds
 
 ```
+
+Nada Inusual hmm.... Vamos a ver la pagina Web.
+Como podemos ver, tenemos el puerto 80 abierto, en este caso corresponde hacer la revisión de lo que está publicado en dicho puerto:
+![](../assets/images/htb-writeup-formulax/register1.PNG)
+
+
