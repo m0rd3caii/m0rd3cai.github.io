@@ -1,4 +1,4 @@
-![image](https://github.com/m0rd3caii/m0rd3cai.github.io/assets/142639542/bb8f7818-55a8-4155-8d7a-cb611ccc0300)---
+---
 layout: single
 title: FormulaX - Hack The Box
 excerpt: "Descripcion"
