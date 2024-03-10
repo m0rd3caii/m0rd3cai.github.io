@@ -103,7 +103,8 @@ Parece que la cookie es una API key para sean mas seguras las peticiones con la 
 {
 "userID"=:"65eda379658edff97d460d42",
 "iat":1710072703
-}json
+}
+```
 
 Si seguimos enumerando podemos ver que hay un archivo chat.js, en este podemos ver que esta haciendo conexiones socket para conectarse a los chats. hmm..
 Espera.. y si utilizamos las funciones para ver chats de otros ususarios?
@@ -137,6 +138,7 @@ socket.on('message', (my_message) => {
 })
 
 typing_chat_2()
+
 ```
 
 Vamoss..Tenemos lo que parece el historial de algun chat!!
