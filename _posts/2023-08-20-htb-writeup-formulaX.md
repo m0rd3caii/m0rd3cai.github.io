@@ -109,7 +109,7 @@ Parece que la cookie es una API key para sean mas seguras las peticiones con la 
 Si seguimos enumerando podemos ver que hay un archivo chat.js, en este podemos ver que esta haciendo conexiones socket para conectarse a los chats. hmm..
 Espera.. y si utilizamos las funciones para ver chats de otros ususarios?
 
-Si hacemos cremos este archivo .js utilizando las funciones para que nos rediriga los mensages puede que nos de algo, vamos a probarlo:
+Si hacemos cremos este archivo .js utilizando las funciones podriamos redirigir los mensages puede que nos de algo, vamos a probarlo:
 
 ```javascript
 let value;
