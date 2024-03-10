@@ -80,9 +80,11 @@ Por encima ver que tenemos la capacidad de interactur con un bot...
 
 Al parecer el serivicio no esta activo pero aun asi podemos ejecutar el comando "help" el cual nos muestra los comandos activos:
 ```"history -- Shows the Previous Sent"```
+
 ![](../assets/images/htb-writeup-formulax/chat1.PNG)
 
 Parece interesante pero vamos a continuar con la enumeracion...
+
 ![](../assets/images/htb-writeup-formulax/contact1.PNG)
 
 Hmm un formulario, vamos a ver si realmente hace algo por detras.
