@@ -1,7 +1,7 @@
 ---
 layout: single
 title: PermX - Hack The Box
-excerpt: "Descripcion"
+excerpt: "Máquina fácil con explotación de CVE y escalada de privilegios manual."
 date: 2024-07-09
 classes: wide
 header:
